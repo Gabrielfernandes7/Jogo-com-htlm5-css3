@@ -27,7 +27,8 @@ function start(){
 
     //Principais variáveis do jogo
     var jogo = {};
-    
+    var velocidade = 5;
+    var posicaoY = parseInt(Math.random() * 334);
 
     //GAME LOOP
     jogo.timer = setInterval(loop, 30);
@@ -35,6 +36,8 @@ function start(){
     function loop() {
         movefundo();
         movejogador();
+        moveinimigo1();
+        moveinimigo2();
     }
 
     //Função que movimenta o jogo
@@ -69,7 +72,17 @@ function start(){
         }
     }
 
-    
+    function moveinimigo1() {
+        posicaoX = parseInt($("#inimigo1").css("left"));
+        $("#inimigo1").css("left", posicaoX - velocidade);
+        $("#inimigo1").css("top", posicaoY);
+
+        if (posicaoX <= 0) {
+            posicaoY = parseInt(Math.random() * 334);
+            $("#inimigo1").css("left", 694);
+            $("#inimigo1").css("top", posicaoY);
+        }
+    }
 
    
 
