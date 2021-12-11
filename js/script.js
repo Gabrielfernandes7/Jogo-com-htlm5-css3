@@ -38,6 +38,7 @@ function start(){
         movejogador();
         moveinimigo1();
         moveinimigo2();
+        moveamigo();
     }
 
     //Função que movimenta o jogo
@@ -84,7 +85,22 @@ function start(){
         }
     }
 
-   
+    function inimigo2() {
+        posicaoX = parseInt($("#inimigo2").css("left"));
+        $("#inimigo2").css("left", posicaoX - 3);
+        if (posicaoX <= 0) {
+            $("#inimigo2").css("left", 775);
+        }
+    }
+
+   function moveamigo() {
+       posicaoX = parseInt($("#amigo").css("left"));
+       $("amigo".css("left", posicao + 1));
+
+       if (posicaoX > 906) {
+           $("#amigo").css("left", 0);
+       }
+   }
 
 
 } // fim da função
