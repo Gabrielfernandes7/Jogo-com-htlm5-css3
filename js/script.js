@@ -26,6 +26,8 @@ function start(){
     });
 
     //Principais variáveis do jogo
+
+    var podeAtirar = true;
     var jogo = {};
     var velocidade = 5;
     var posicaoY = parseInt(Math.random() * 334);
@@ -39,6 +41,7 @@ function start(){
         moveinimigo1();
         moveinimigo2();
         moveamigo();
+        colisao();
     }
 
     //Função que movimenta o jogo
@@ -70,6 +73,7 @@ function start(){
 
         if (jogo.pressionou[TECLA.D]) {
             //Chama a função disparo
+            disparo();
         }
     }
 
@@ -100,7 +104,39 @@ function start(){
        if (posicaoX > 906) {
            $("#amigo").css("left", 0);
        }
-   }
+    }
+    
+    function disparo() {
+        if (podeAtirar == true) {
+            podeAtirar = false;
+            topo = parseInt($("#jogador").css("top"));
+            posicaoX = parseInt($("#jogador").css("left"));
+            tiroX = posicaoX + 190;
+            topoTiro = topo + 37;
+            $("#fundoGame").append("<div id='disparo'></div>");
+            $("#disparo").css("top", topoTiro);
+            $("#disparo").css("left", tiroX);
+
+            var tempoDisparo = window.setInterval(executaDisparo, 30);
+
+            function executaDisparo() {
+                posicaoX = parseInt($("#disparo").css("left"));
+                $("#disparo").css("left", posicaoX + 15);
+                if (posicaoX > 900) {
+                    window.clearInterval(tempoDisparo);
+                    tempoDisparo = null;
+                    $("#disparo").remove();
+                    podeAtirar = true;
+                }
+            }
+        }
+    }
+
+    function colisao() {
+        var colisao1 = ($("#jogador").collision($("#inimigo1")));
+        // Jogador com o inimigo1
+        console.log(colisao1);
+    } //fim da colisao
 
 
 } // fim da função
