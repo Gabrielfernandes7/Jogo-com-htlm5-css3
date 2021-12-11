@@ -13,6 +13,28 @@ function start(){
     jogo.timer = setInterval(loop, 30);
 
     function loop() {
-        movefundo()
+        movefundo();
     }
+
+    //Função que movimenta o jogo
+
+    function movefundo() {
+        esquerda = parseInt($("#fundoGame").css("background-position"));
+        $("fundoGame").css("background-position", esquerda - 1);
+    }//Move fundo
+
+    var TECLA = {
+        W: 87,
+        S: 83,
+        D: 68
+    };
+
+    jogo.pressionou = [];
+
+    //Verifica se o usuario pressionou alguma tecla
+
+    $(document).keyup(function (e) {
+        jogo.pressionou[e.wich] = false;
+    });
+
 } // fim da função
